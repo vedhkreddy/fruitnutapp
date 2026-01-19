@@ -1,17 +1,6 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as React from "react";
-
-import FarmerDashboard from "./index";
-
-const Stack = createNativeStackNavigator();
+// This file is intentionally left as a noop to avoid creating a second NavigationContainer
+// when using Expo Router's file-based navigation system.
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Farmer">
-        <Stack.Screen name="Farmer" component={FarmerDashboard} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  return null;
 }
