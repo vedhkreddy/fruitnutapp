@@ -1,4 +1,4 @@
-import { DEMO_VOLUNTEER_NAME } from '@/lib/AppContext';
+import { useApp } from '@/lib/AppContext';
 import { supabase } from '@/lib/supabase';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, FlatList, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -16,6 +16,7 @@ type Shift = {
 };
 
 export default function VolunteerShifts() {
+  const { volunteerName, session } = useApp();
   const [shifts, setShifts] = useState<Shift[]>([]);
   const [loading, setLoading] = useState(true);
   const [signingUp, setSigningUp] = useState<string | null>(null);
@@ -56,7 +57,7 @@ export default function VolunteerShifts() {
       return;
     }
     setSigningUp(shift.id);
-    await supabase.from('shift_signups').insert({ shift_id: shift.id, volunteer_name: DEMO_VOLUNTEER_NAME });
+    await supabase.from('shift_signups').insert({ shift_id: shift.id, volunteer_name: volunteerName, user_id: session?.user?.id ?? null });
 
     // Update status to full if at limit
     const newCount = shift.signed_up + 1;

@@ -1,4 +1,4 @@
-import { DEMO_VOLUNTEER_NAME } from '@/lib/AppContext';
+import { useApp } from '@/lib/AppContext';
 import { supabase } from '@/lib/supabase';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
@@ -14,6 +14,7 @@ type Contribution = {
 };
 
 export default function MyContributions() {
+  const { session } = useApp();
   const [contributions, setContributions] = useState<Contribution[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +24,7 @@ export default function MyContributions() {
       const { data } = await supabase
         .from('shift_signups')
         .select('id, amount_picked_lbs, amount_donated_lbs, shifts(date, fruit, farms(name), donation_centers(name))')
-        .eq('volunteer_name', DEMO_VOLUNTEER_NAME)
+        .eq('user_id', session?.user?.id ?? '')
         .eq('logged_donation', true)
         .order('created_at', { ascending: false });
 

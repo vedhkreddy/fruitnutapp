@@ -50,16 +50,21 @@ export default function VolunteerLayout() {
         }}
       />
 
+      <Tabs.Screen name="waiver" options={{ href: null, headerTitle: 'Waiver' }} />
+
       <Tabs.Screen
-        name="waiver"
+        name="profile"
         options={{
-          title: 'Waiver',
+          title: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="document" size={size} color={color} />
+            <Ionicons name="person" size={size} color={color} />
           ),
-          headerTitle: 'Waiver',
+          headerTitle: 'My Profile',
         }}
       />
+
+      <Tabs.Screen name="messages" options={{ href: null }} />
+      <Tabs.Screen name="my-shifts" options={{ href: null }} />
     </Tabs>
   );
 }

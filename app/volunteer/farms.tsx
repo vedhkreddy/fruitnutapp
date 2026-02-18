@@ -1,4 +1,4 @@
-import { DEMO_VOLUNTEER_NAME } from '@/lib/AppContext';
+import { useApp } from '@/lib/AppContext';
 import { supabase } from '@/lib/supabase';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -24,6 +24,7 @@ function isPast(dateStr: string) {
 }
 
 export default function MyHarvests() {
+  const { session } = useApp();
   const [harvests, setHarvests] = useState<MyHarvest[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -36,7 +37,7 @@ export default function MyHarvests() {
     const { data } = await supabase
       .from('shift_signups')
       .select('id, shift_id, amount_picked_lbs, amount_donated_lbs, logged_donation, shifts(date, time, fruit, farms(name), donation_centers(name))')
-      .eq('volunteer_name', DEMO_VOLUNTEER_NAME)
+      .eq('user_id', session?.user?.id ?? '')
       .order('created_at', { ascending: false });
 
     if (data) {

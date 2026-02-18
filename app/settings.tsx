@@ -1,10 +1,12 @@
 import { useApp } from '@/lib/AppContext';
 import { supabase } from '@/lib/supabase';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Modal, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function Settings() {
-  const { farmId } = useApp();
+  const { farmId, profiles, setActiveProfile, signOut } = useApp();
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -66,7 +68,7 @@ export default function Settings() {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
       {/* Farm Profile */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Farm Profile</Text>
@@ -98,6 +100,23 @@ export default function Settings() {
 
         <TouchableOpacity style={styles.saveButton} onPress={() => setShowSaveModal(true)}>
           <Text style={styles.saveButtonText}>Save Profile Changes</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Account */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Account</Text>
+        <TouchableOpacity
+          style={styles.saveButton}
+          onPress={() => { setActiveProfile(null); router.replace('/home'); }}
+        >
+          <Text style={styles.saveButtonText}>Switch / Add Role</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.saveButton, { backgroundColor: '#C0392B', marginTop: 10 }]}
+          onPress={signOut}
+        >
+          <Text style={styles.saveButtonText}>Sign Out</Text>
         </TouchableOpacity>
       </View>
 
