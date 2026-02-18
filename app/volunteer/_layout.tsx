@@ -31,22 +31,22 @@ export default function VolunteerLayout() {
       <Tabs.Screen
         name="farms"
         options={{
-          title: 'Farms',
+          title: 'My Harvests',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="leaf" size={size} color={color} />
           ),
-          headerTitle: 'Farms',
+          headerTitle: 'My Harvests',
         }}
       />
 
       <Tabs.Screen
         name="donations"
         options={{
-          title: 'Donated',
+          title: 'My Contributions',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="wallet" size={size} color={color} />
           ),
-          headerTitle: 'My Donations',
+          headerTitle: 'My Contributions',
         }}
       />
 

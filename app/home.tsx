@@ -1,9 +1,12 @@
+import { useApp } from '@/lib/AppContext';
 import { useRouter } from 'expo-router';
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Home() {
   const router = useRouter();
+  const { setRole } = useApp();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to FruitNut</Text>
@@ -13,9 +16,7 @@ export default function Home() {
         <TouchableOpacity
           style={[styles.roleButton, styles.farmerButton]}
           onPress={() => {
-            // TODO: call backend auth/login for farmer
-            // Example: await api.login({ role: 'farmer', ...credentials })
-            // Save token, set user role, then navigate
+            setRole('farmer');
             router.push('/farmer');
           }}
         >
@@ -25,7 +26,7 @@ export default function Home() {
         <TouchableOpacity
           style={[styles.roleButton, styles.volunteerButton]}
           onPress={() => {
-            // TODO: call backend auth/login for volunteer
+            setRole('volunteer');
             router.push('/volunteer');
           }}
         >
@@ -35,18 +36,13 @@ export default function Home() {
         <TouchableOpacity
           style={[styles.roleButton, styles.centerButton]}
           onPress={() => {
-            // TODO: call backend auth/login for donation center
+            setRole('center');
             router.push('/center');
           }}
         >
           <Text style={styles.roleText}>Login as Donation Center</Text>
         </TouchableOpacity>
       </View>
-
-      <Text style={styles.note}>
-        Note: Authentication/backend integration commented where needed. For now these
-        buttons simply navigate to the respective UI.
-      </Text>
     </View>
   );
 }
@@ -69,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#66785F",
     textAlign: "center",
-    marginBottom: 24,
+    marginBottom: 40,
   },
   buttons: {
     gap: 12,
@@ -98,11 +94,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "600",
     fontSize: 16,
-  },
-  note: {
-    marginTop: 24,
-    fontSize: 12,
-    color: "#66785F",
-    textAlign: "center",
   },
 });

@@ -31,11 +31,11 @@ export default function FarmerLayout() {
       <Tabs.Screen
         name="shifts"
         options={{
-          title: 'Timings',
+          title: 'Harvests',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="time" size={size} color={color} />
           ),
-          headerTitle: 'Shift Timings',
+          headerTitle: 'Harvests',
         }}
       />
 

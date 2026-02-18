@@ -20,11 +20,11 @@ export default function CenterLayout() {
       <Tabs.Screen
         name="volunteer-stats"
         options={{
-          title: 'Volunteers',
+          title: 'Incoming',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="people" size={size} color={color} />
+            <Ionicons name="cube" size={size} color={color} />
           ),
-          headerTitle: 'Volunteer Stats',
+          headerTitle: 'Incoming Donations',
         }}
       />
 
